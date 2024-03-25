@@ -14,44 +14,52 @@ window.addEventListener('DOMContentLoaded', function () {
   let urlSelection = '';
   function buttonPresset(selectionButton) {
     if (selectionButton === 'Главная') {
-      return (urlSelection = '');
+      return (urlSelection = 'page/home.html');
     } else if (selectionButton === 'Услуги') {
-      return (urlSelection = 'servises.html');
+      return (urlSelection = 'page/servises.html');
     } else if (selectionButton === 'О нас') {
-      return (urlSelection = 'aboutUs.html');
+      return (urlSelection = 'page/aboutUs.html');
     } else if (selectionButton === 'Контакты') {
-      return (urlSelection = 'contacts.html');
+      return (urlSelection = 'page/contacts.html');
     }
   }
-  console.log(urlSelection);
+  // Загрузка скрипта 'О нас'
+  const loadScript = function (urlSelection) {
+    if (urlSelection.includes('aboutUs')) {
+      document.querySelector('.btn').addEventListener('click', (e) => {
+        console.log('Нажал', e.target);
+      });
+    }
+  };
   selectionMenu.forEach((event) => {
     event.addEventListener('click', (e) => {
-      e.preventDefault()
-      console.log(e.target.id);
+      e.preventDefault();
       buttonPresset(e.target.id);
 
       fetch(urlSelection)
-      .then((response) => {
+        .then((response) => {
           if (response.url === 'http://127.0.0.1:5500/index.html') {
-              return fetch('home.html');
+            return fetch('home.html');
           } else {
-              return response.text();
+            return response.text();
           }
-      })
-      .then((data) => {
+        })
+        .then((data) => {
           if (typeof data === 'string') {
-              console.log('Это данные', data);
-              apofiosHome.innerHTML = data;
+            apofiosHome.innerHTML = data;
           } else {
-              data.text().then((homeData) => {
-                  console.log('Это данные', homeData);
-                  apofiosHome.innerHTML = homeData;
-              });
+            data.text().then((homeData) => {
+              apofiosHome.innerHTML = homeData;
+              buttonClick();
+            });
           }
-      })
-      .catch((error) => {
+        })
+        .then(() => {
+          loadScript(urlSelection);
+        })
+        .catch((error) => {
           console.error('Произошла ошибка:', error);
-      });
+        });
     });
   });
 });
