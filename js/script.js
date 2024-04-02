@@ -23,14 +23,27 @@ window.addEventListener('DOMContentLoaded', function () {
       return (urlSelection = 'page/contacts.html');
     }
   }
+
   // Загрузка скрипта 'О нас'
+  const swithingPicture = () => {
+    const imgAbout = document.querySelectorAll('.img-about');
+    const currentImage = document.querySelector('.img-about.active');
+    const currentIndex = Array.from(imgAbout).indexOf(currentImage);
+    currentImage.classList.remove('active');
+    let nextIndex = (currentIndex + 1) % imgAbout.length;
+    imgAbout[nextIndex].classList.add('active');
+  };
+
+  const backPage = () => {};
+
   const loadScript = function (urlSelection) {
     if (urlSelection.includes('aboutUs')) {
-      document.querySelector('.btn').addEventListener('click', (e) => {
-        console.log('Нажал', e.target);
+      document.querySelector('.btn').addEventListener('click', () => {
+        swithingPicture();
       });
     }
   };
+  //
   selectionMenu.forEach((event) => {
     event.addEventListener('click', (e) => {
       e.preventDefault();

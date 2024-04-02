@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  gap: 130px;
+}
+h1 {
+  text-align: center;
+}
+.square {
+  margin-left: -3px;
+  max-width: 475px;
+  font-family: Arial, sans-serif;
+  font-size: 19px;
+}
+.img-about {
+  display: none;
+  width: 481px;
+  height: 395px;
+}
+.active {
+  display: block;
+}
+.img-about1 {
+  margin-left: 140px;
+  width: 481px;
+  height: 395px;
+}
+h3 {
+  margin-left: 150px;
+  font-family: Arial, sans-serif;
+  font-size: 19px;
+  width: 350px;
+}
+.roof {
+  margin-top: 50px;
+}

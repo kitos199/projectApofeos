@@ -4,7 +4,7 @@ header {
   padding: 9.375rem;
 }
 /* Главное меню */
-.container {
+.element-menu {
   position: fixed;
   z-index: 1;
 }
@@ -47,7 +47,7 @@ header {
 }
 /* Главная страница */
 .apofios-home {
-  padding-left: 50px;
+  margin-left: 50px;
   display: flex;
   flex-direction: column;
 }
