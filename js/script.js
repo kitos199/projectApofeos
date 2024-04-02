@@ -25,22 +25,30 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   // Загрузка скрипта 'О нас'
-  const swithingPicture = () => {
+  const swithingPicture = (direction) => {
     const imgAbout = document.querySelectorAll('.img-about');
     const currentImage = document.querySelector('.img-about.active');
     const currentIndex = Array.from(imgAbout).indexOf(currentImage);
     currentImage.classList.remove('active');
-    let nextIndex = (currentIndex + 1) % imgAbout.length;
-    imgAbout[nextIndex].classList.add('active');
-  };
 
-  const backPage = () => {};
+    let nextIndex;
+  if(direction='next'){
+     nextIndex = (currentIndex + 1) % imgAbout.length;
+    imgAbout[nextIndex].classList.add('active');
+  }else if(direction='previous'){
+  nextIndex=(currentIndex-1)%imgAbout.length
+  }
+}
+    
 
   const loadScript = function (urlSelection) {
     if (urlSelection.includes('aboutUs')) {
-      document.querySelector('.btn').addEventListener('click', () => {
-        swithingPicture();
+      document.querySelector('.next').addEventListener('click', () => {
+        swithingPicture('next');
       });
+      document.querySelector('.previous').addEventListener('click',()=>{
+        swithingPicture('previous')
+      })
     }
   };
   //
